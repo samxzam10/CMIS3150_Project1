@@ -293,7 +293,6 @@ GameObject:
   - component: {fileID: 300661113}
   - component: {fileID: 300661112}
   - component: {fileID: 300661111}
-  - component: {fileID: 300661115}
   m_Layer: 0
   m_Name: Coin (6)
   m_TagString: Coin
@@ -396,19 +395,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &300661115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300661110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e77725d216813a48b93516756b611c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
-  rotationSpeed: 100
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,7 +783,6 @@ GameObject:
   - component: {fileID: 603470421}
   - component: {fileID: 603470420}
   - component: {fileID: 603470419}
-  - component: {fileID: 603470423}
   m_Layer: 0
   m_Name: Coin (5)
   m_TagString: Coin
@@ -900,19 +885,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &603470423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 603470418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e77725d216813a48b93516756b611c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
-  rotationSpeed: 100
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,7 +946,6 @@ GameObject:
   - component: {fileID: 887880466}
   - component: {fileID: 887880465}
   - component: {fileID: 887880464}
-  - component: {fileID: 887880468}
   m_Layer: 0
   m_Name: Coin (4)
   m_TagString: Coin
@@ -1077,19 +1048,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &887880468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 887880463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e77725d216813a48b93516756b611c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
-  rotationSpeed: 100
 --- !u!1 &907444697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,7 +1060,6 @@ GameObject:
   - component: {fileID: 907444700}
   - component: {fileID: 907444699}
   - component: {fileID: 907444698}
-  - component: {fileID: 907444702}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Coin
@@ -1205,19 +1162,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &907444702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 907444697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e77725d216813a48b93516756b611c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
-  rotationSpeed: 100
 --- !u!1 &954524515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,7 +1734,6 @@ GameObject:
   - component: {fileID: 1453555053}
   - component: {fileID: 1453555052}
   - component: {fileID: 1453555051}
-  - component: {fileID: 1453555055}
   m_Layer: 0
   m_Name: Coin (2)
   m_TagString: Coin
@@ -1893,19 +1836,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1453555055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1453555050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e77725d216813a48b93516756b611c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
-  rotationSpeed: 100
 --- !u!1 &1565403031
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,7 +1961,6 @@ GameObject:
   - component: {fileID: 1716026804}
   - component: {fileID: 1716026803}
   - component: {fileID: 1716026802}
-  - component: {fileID: 1716026806}
   m_Layer: 0
   m_Name: Coin (7)
   m_TagString: Coin
@@ -2134,19 +2063,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1716026806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1716026801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e77725d216813a48b93516756b611c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
-  rotationSpeed: 100
 --- !u!1 &2044376546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,7 +2075,6 @@ GameObject:
   - component: {fileID: 2044376549}
   - component: {fileID: 2044376548}
   - component: {fileID: 2044376547}
-  - component: {fileID: 2044376551}
   m_Layer: 0
   m_Name: Coin (3)
   m_TagString: Coin
@@ -2262,19 +2177,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2044376551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044376546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e77725d216813a48b93516756b611c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
-  rotationSpeed: 100
 --- !u!1 &2063247353
 GameObject:
   m_ObjectHideFlags: 0
@@ -2287,7 +2189,6 @@ GameObject:
   - component: {fileID: 2063247356}
   - component: {fileID: 2063247355}
   - component: {fileID: 2063247354}
-  - component: {fileID: 2063247358}
   m_Layer: 0
   m_Name: Coin (1)
   m_TagString: Coin
@@ -2390,19 +2291,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2063247358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063247353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e77725d216813a48b93516756b611c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
-  rotationSpeed: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
