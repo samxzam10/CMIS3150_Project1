@@ -409,6 +409,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
   rotationSpeed: 100
+  bobSpeed: 2
+  bobHeight: 0.25
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +687,7 @@ GameObject:
   - component: {fileID: 458121960}
   - component: {fileID: 458121959}
   - component: {fileID: 458121958}
+  - component: {fileID: 458121962}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Obstacle
@@ -785,6 +788,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &458121962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458121957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defde185a547af44ebccd94bdddf24eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovingObstacle
+  moveDistance: 4
+  speed: 2
 --- !u!1 &603470418
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,6 +930,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
   rotationSpeed: 100
+  bobSpeed: 2
+  bobHeight: 0.25
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,6 +1109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
   rotationSpeed: 100
+  bobSpeed: 2
+  bobHeight: 0.25
 --- !u!1 &907444697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,6 +1239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
   rotationSpeed: 100
+  bobSpeed: 2
+  bobHeight: 0.25
 --- !u!1 &954524515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,6 +1253,7 @@ GameObject:
   - component: {fileID: 954524518}
   - component: {fileID: 954524517}
   - component: {fileID: 954524516}
+  - component: {fileID: 954524520}
   m_Layer: 0
   m_Name: Obstacle (4)
   m_TagString: Obstacle
@@ -1330,6 +1354,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &954524520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954524515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defde185a547af44ebccd94bdddf24eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovingObstacle
+  moveDistance: 4
+  speed: 2
 --- !u!1 &976152972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,6 +1380,7 @@ GameObject:
   - component: {fileID: 976152975}
   - component: {fileID: 976152974}
   - component: {fileID: 976152973}
+  - component: {fileID: 976152977}
   m_Layer: 0
   m_Name: Obstacle (5)
   m_TagString: Obstacle
@@ -1442,6 +1481,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &976152977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976152972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defde185a547af44ebccd94bdddf24eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovingObstacle
+  moveDistance: 4
+  speed: 2
 --- !u!1 &1233227396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,6 +1507,7 @@ GameObject:
   - component: {fileID: 1233227399}
   - component: {fileID: 1233227398}
   - component: {fileID: 1233227397}
+  - component: {fileID: 1233227401}
   m_Layer: 0
   m_Name: Obstacle (1)
   m_TagString: Obstacle
@@ -1554,6 +1608,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1233227401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233227396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defde185a547af44ebccd94bdddf24eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovingObstacle
+  moveDistance: 4
+  speed: 2
 --- !u!1 &1413822426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,6 +1634,7 @@ GameObject:
   - component: {fileID: 1413822429}
   - component: {fileID: 1413822428}
   - component: {fileID: 1413822427}
+  - component: {fileID: 1413822431}
   m_Layer: 0
   m_Name: Obstacle (3)
   m_TagString: Obstacle
@@ -1666,6 +1735,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1413822431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413822426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defde185a547af44ebccd94bdddf24eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovingObstacle
+  moveDistance: 4
+  speed: 2
 --- !u!1 &1449231148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,6 +1761,7 @@ GameObject:
   - component: {fileID: 1449231151}
   - component: {fileID: 1449231150}
   - component: {fileID: 1449231149}
+  - component: {fileID: 1449231153}
   m_Layer: 0
   m_Name: Obstacle (2)
   m_TagString: Obstacle
@@ -1778,6 +1862,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1449231153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449231148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defde185a547af44ebccd94bdddf24eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovingObstacle
+  moveDistance: 4
+  speed: 2
 --- !u!1 &1453555050
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,6 +2004,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
   rotationSpeed: 100
+  bobSpeed: 2
+  bobHeight: 0.25
 --- !u!1 &1565403031
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,6 +2247,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
   rotationSpeed: 100
+  bobSpeed: 2
+  bobHeight: 0.25
 --- !u!1 &2044376546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2275,6 +2377,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
   rotationSpeed: 100
+  bobSpeed: 2
+  bobHeight: 0.25
 --- !u!1 &2063247353
 GameObject:
   m_ObjectHideFlags: 0
@@ -2403,6 +2507,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinRotator
   rotationSpeed: 100
+  bobSpeed: 2
+  bobHeight: 0.25
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
