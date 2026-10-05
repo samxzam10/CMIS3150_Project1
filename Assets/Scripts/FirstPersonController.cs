@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; // Needed for scene restart
 using TMPro; 
 
 public class FirstPersonController : MonoBehaviour
@@ -6,6 +7,8 @@ public class FirstPersonController : MonoBehaviour
     [Header("UI Reference")]
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI livesText;
+    public GameObject gameOverPanel;
+    public GameObject winPanel;
 
     [Header("Movement Settings")]
     public float walkSpeed = 5.0f;
@@ -14,23 +17,27 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("Look Settings")]
     public float mouseSensitivity = 200.0f;
-    public Transform cameraTransform; // Drag Main Camera here in the Inspector
+    public Transform cameraTransform;
 
     [Header("Game State")]
-    public int lives = 3; // Start with 3 lives
+    public int lives = 3;
     private int coinsCollected = 0;
-    private const int totalCoins = 8; // Need 8 coins to win
+    private const int totalCoins = 8;
 
     private Rigidbody rb;
     private bool isGrounded;
-    private float xRotation = 0f; // Stores up/down camera angle
+    private float xRotation = 0f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         UpdateUI();
 
-        // Lock mouse to the middle of screen so cursor doesn't drift off-game
+        // Make sure game over / win panels start hidden
+        if (gameOverPanel != null) gameOverPanel.SetActive(false);
+        if (winPanel != null) winPanel.SetActive(false);
+
+        // Lock mouse to center of screen
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -41,7 +48,6 @@ public class FirstPersonController : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        // Look Up/Down: Clamp angle between -90 and 90
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         if (cameraTransform != null)
@@ -49,14 +55,13 @@ public class FirstPersonController : MonoBehaviour
             cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         }
 
-        // Look Left/Right: Turn entire player body horizontally
         transform.Rotate(Vector3.up * mouseX);
 
         // JUMP LOGIC
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false; // Prevent double jumping
+            isGrounded = false;
         }
     }
 
@@ -66,7 +71,6 @@ public class FirstPersonController : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        // Hold Left Shift to run, otherwise walk
         float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
 
         Vector3 moveDirection = transform.right * moveX + transform.forward * moveZ;
@@ -75,26 +79,25 @@ public class FirstPersonController : MonoBehaviour
         rb.MovePosition(newPos);
     }
 
-    // SOLID COLLISIONS (Ground & Obstacles)    
+    // SOLID COLLISIONS (Ground & Obstacles)
     private void OnCollisionEnter(Collision collision)
     {
-        // Reset jump ability when landing back on ground
+        // Print every solid object you collide with to the Console window
+        Debug.Log("COLLIDED WITH: " + collision.gameObject.name);
+
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
         }
 
-        // Subtract life on physical contact with red obstacles
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             lives--;
-            UpdateUI(); // Update text on screen!
-            Debug.Log("Hit Obstacle! Lives remaining: {lives}");
+            UpdateUI();
 
             if (lives <= 0)
             {
-                Debug.Log("Game Over!");
-                Application.Quit();
+                TriggerGameOver();
             }
         }
     }
@@ -102,30 +105,50 @@ public class FirstPersonController : MonoBehaviour
     // TRIGGER COLLISIONS (Coin Collectibles)
     private void OnTriggerEnter(Collider other)
     {
+        // Print every trigger object you walk through to the Console window
+        Debug.Log("TOUCHED TRIGGER: " + other.gameObject.name);
+
         if (other.CompareTag("Coin"))
         {
             coinsCollected++;
-            UpdateUI(); // Update text on screen!
+            UpdateUI();
             Destroy(other.gameObject);
-            Debug.Log("Collected Coin! ({coinsCollected}/{totalCoins})");
 
             if (coinsCollected >= totalCoins)
             {
-                Debug.Log("You Win!");
-                Application.Quit();
+                TriggerWin();
             }
         }
     }
 
     private void UpdateUI()
     {
-        if (coinText != null)
-        {
-            coinText.text = "Coins: {coinsCollected} / {totalCoins}";
-        }
-        if (livesText != null)
-        {
-            livesText.text = "Lives: {lives}";
-        }
+        if (coinText != null) coinText.text = "Coins: " + coinsCollected + " / " + totalCoins;
+        if (livesText != null) livesText.text = "Lives: " + lives;
+    }
+
+    private void TriggerGameOver()
+    {
+        if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        EndGame();
+    }
+
+    private void TriggerWin()
+    {
+        if (winPanel != null) winPanel.SetActive(true);
+        EndGame();
+    }
+
+    private void EndGame()
+    {
+        Time.timeScale = 0f; // Pause physics & gameplay
+        Cursor.lockState = CursorLockMode.None; // Unlock cursor for UI
+        Cursor.visible = true;
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f; // Restore game speed before reload
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
