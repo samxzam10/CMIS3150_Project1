@@ -1,31 +1,66 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro; // Interacts with TextMeshPro components
 
+// Manages all HUD updates, victory/loss UI overlays, and button navigation
 public class GameUIController : MonoBehaviour
 {
+    // --- INSPECTOR FIELDS ---
+
+    [Header("HUD Text Elements")]
+    // Reference to TextMeshPro UI element displaying coins collected
+    [SerializeField] private TextMeshProUGUI coinText;
+    // Reference to TextMeshPro UI element displaying remaining lives
+    [SerializeField] private TextMeshProUGUI livesText;
+
     [Header("UI Panels")]
+    // Reference to Game Over overlay panel
     [SerializeField] private GameObject gameOverPanel;
+    // Reference to Victory/Win overlay panel
     [SerializeField] private GameObject winPanel;
 
+    // Flags preventing game state methods from running multiple times
     private bool isGameEnded = false;
 
     private void Start()
     {
-        // Ensure panels are hidden when the game starts
+        // Hide overlay panels on scene start
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
         if (winPanel != null) winPanel.SetActive(false);
         
-        // Reset time scale in case it was paused previously
+        // Ensure normal frame time playback
         Time.timeScale = 1f;
     }
+
+    // --- HUD UPDATES ---
+
+    public void UpdateCoinText(int currentCoins, int totalCoins)
+    {
+        if (coinText != null)
+        {
+            coinText.text = "Coins: " + currentCoins + " / " + totalCoins;
+        }
+    }
+
+    public void UpdateLivesText(int lives)
+    {
+        if (livesText != null)
+        {
+            livesText.text = "Lives: " + lives;
+        }
+    }
+
+    // --- GAME OVER & WIN TRIGGERS ---
 
     public void TriggerGameOver()
     {
         if (isGameEnded) return;
         isGameEnded = true;
 
-        gameOverPanel.SetActive(true);
-        PauseGame();
+        Debug.Log("Game Over!");
+        if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        
+        PauseGameAndUnlockCursor();
     }
 
     public void TriggerWin()
@@ -33,31 +68,33 @@ public class GameUIController : MonoBehaviour
         if (isGameEnded) return;
         isGameEnded = true;
 
-        winPanel.SetActive(true);
-        PauseGame();
+        Debug.Log("You Win!");
+        if (winPanel != null) winPanel.SetActive(true);
+        
+        PauseGameAndUnlockCursor();
     }
 
-    private void PauseGame()
+    private void PauseGameAndUnlockCursor()
     {
-        // Freezes physics and time-dependent actions
-        Time.timeScale = 0f; 
-        
-        // Unlock cursor if using a 3D/FPS camera
+        Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    // Button Actions
+    // --- BUTTON ACTIONS ---
 
     public void RestartGame()
     {
-        Time.timeScale = 1f; // Always restore time scale before reloading
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void LoadMainMenu()
+    public void QuitGame()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu"); // Replace with your main menu scene name
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }

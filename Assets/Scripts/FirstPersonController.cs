@@ -1,55 +1,71 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Needed for scene restart
-using TMPro; 
 
+// Handles player movement, jumping, mouse look, and physics triggers/collisions
 public class FirstPersonController : MonoBehaviour
 {
-    [Header("UI Reference")]
-    public TextMeshProUGUI coinText;
-    public TextMeshProUGUI livesText;
-    public GameObject gameOverPanel;
-    public GameObject winPanel;
+    // --- INSPECTOR REFERENCES ---
+
+    [Header("UI Controller Reference")]
+    // Reference to the GameUIController script managing HUD and canvas overlays
+    public GameUIController uiController;
 
     [Header("Movement Settings")]
+    // Normal walking speed multiplier
     public float walkSpeed = 5.0f;
+    // Sprinting speed multiplier when holding Shift
     public float runSpeed = 9.0f;
+    // Impulse force applied upwards when jumping
     public float jumpForce = 6.0f;
 
     [Header("Look Settings")]
+    // Mouse rotation sensitivity speed
     public float mouseSensitivity = 200.0f;
+    // Reference to the main camera transform attached to the player
     public Transform cameraTransform;
 
     [Header("Game State")]
+    // Starting life count for the player
     public int lives = 3;
+    // Tracks current number of coins collected
     private int coinsCollected = 0;
+    // Target coin count required to trigger win condition
     private const int totalCoins = 8;
 
+    // --- PRIVATE VARIABLES ---
+
+    // Reference to attached Rigidbody component
     private Rigidbody rb;
+    // Ground state flag to prevent infinite mid-air jumps
     private bool isGrounded;
+    // Accumulates vertical pitch rotation angle
     private float xRotation = 0f;
 
     void Start()
     {
+        // Cache Rigidbody component
         rb = GetComponent<Rigidbody>();
-        UpdateUI();
 
-        // Make sure game over / win panels start hidden
-        if (gameOverPanel != null) gameOverPanel.SetActive(false);
-        if (winPanel != null) winPanel.SetActive(false);
+        // Initialize HUD text displays via UI Controller
+        if (uiController != null)
+        {
+            uiController.UpdateCoinText(coinsCollected, totalCoins);
+            uiController.UpdateLivesText(lives);
+        }
 
-        // Lock mouse to center of screen
+        // Lock and hide mouse cursor during gameplay
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     void Update()
     {
-        // MOUSE LOOK LOGIC
+        // --- MOUSE LOOK LOGIC ---
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
         if (cameraTransform != null)
         {
             cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
@@ -57,7 +73,7 @@ public class FirstPersonController : MonoBehaviour
 
         transform.Rotate(Vector3.up * mouseX);
 
-        // JUMP LOGIC
+        // --- JUMP LOGIC ---
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -67,10 +83,11 @@ public class FirstPersonController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // WASD MOVEMENT LOGIC
+        // --- WASD MOVEMENT LOGIC ---
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
+        // Shift to sprint logic
         float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
 
         Vector3 moveDirection = transform.right * moveX + transform.forward * moveZ;
@@ -79,76 +96,50 @@ public class FirstPersonController : MonoBehaviour
         rb.MovePosition(newPos);
     }
 
-    // SOLID COLLISIONS (Ground & Obstacles)
     private void OnCollisionEnter(Collision collision)
     {
-        // Print every solid object you collide with to the Console window
-        Debug.Log("COLLIDED WITH: " + collision.gameObject.name);
-
+        // Check if touching ground
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
         }
 
+        // Check if hitting obstacle hazard
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             lives--;
-            UpdateUI();
 
-            if (lives <= 0)
+            if (uiController != null)
             {
-                TriggerGameOver();
+                uiController.UpdateLivesText(lives);
+            }
+
+            if (lives <= 0 && uiController != null)
+            {
+                uiController.TriggerGameOver();
             }
         }
     }
 
-    // TRIGGER COLLISIONS (Coin Collectibles)
     private void OnTriggerEnter(Collider other)
     {
-        // Print every trigger object you walk through to the Console window
-        Debug.Log("TOUCHED TRIGGER: " + other.gameObject.name);
-
+        // Check if picking up a coin
         if (other.CompareTag("Coin"))
         {
             coinsCollected++;
-            UpdateUI();
+            Debug.Log("Coins Collected: " + coinsCollected);
+
+            if (uiController != null)
+            {
+                uiController.UpdateCoinText(coinsCollected, totalCoins);
+            }
+
             Destroy(other.gameObject);
 
-            if (coinsCollected >= totalCoins)
+            if (coinsCollected >= totalCoins && uiController != null)
             {
-                TriggerWin();
+                uiController.TriggerWin();
             }
         }
-    }
-
-    private void UpdateUI()
-    {
-        if (coinText != null) coinText.text = "Coins: " + coinsCollected + " / " + totalCoins;
-        if (livesText != null) livesText.text = "Lives: " + lives;
-    }
-
-    private void TriggerGameOver()
-    {
-        if (gameOverPanel != null) gameOverPanel.SetActive(true);
-        EndGame();
-    }
-
-    private void TriggerWin()
-    {
-        if (winPanel != null) winPanel.SetActive(true);
-        EndGame();
-    }
-
-    private void EndGame()
-    {
-        Time.timeScale = 0f; // Pause physics & gameplay
-        Cursor.lockState = CursorLockMode.None; // Unlock cursor for UI
-        Cursor.visible = true;
-    }
-
-    public void RestartGame()
-    {
-        Time.timeScale = 1f; // Restore game speed before reload
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
